@@ -1,0 +1,73 @@
+@keyframes left {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animateLeft {
+  animation-name: left;
+  animation-duration: 700ms;
+  animation-delay: 300ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes bottomToTop {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animateBottomToTop {
+  animation-name: bottomToTop;
+  animation-duration: 700ms;
+  animation-delay: 500ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes topToBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animateTopToBottom {
+  animation-name: topToBottom;
+  animation-duration: 700ms;
+  animation-delay: 200ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animateAppear {
+  animation-name: appear;
+  animation-duration: 800ms;
+  animation-delay: 500ms;
+  animation-fill-mode: backwards;
+}

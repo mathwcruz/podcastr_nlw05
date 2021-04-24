@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Image from "next/image";
+
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-
-import Image from "next/image";
 
 import { usePlayer } from '../../contexts/PlayerContext';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 import styles from './styles.module.scss';
+import animationsStyles from "../../styles/animations.module.scss";
 
 export function Player() {
   const audioRef = useRef<HTMLAudioElement>(null); //iniciar como null
-  const [progress, setProgress] = useState(0); //armazenado o tempo, em segundos, o episódio já percorreu
+  const [progress, setProgress] = useState(0); //armazenado o tempo, em segundos, que o episódio já percorreu
 
   const { 
     episodeList, 
@@ -38,9 +39,9 @@ export function Player() {
       return;
     };
 
-    if (isPlaying) { //caso esteja tocando um episódio, toca o <aduio />
+    if (isPlaying) { //caso esteja tocando um episódio, toca o <audio />
       audioRef.current.play();
-    } else { //caso não esteja tocando um episódio, pausa o <aduio />
+    } else { //caso não esteja tocando um episódio, pausa o <audio />
       audioRef.current.pause();
     };
   }, [isPlaying]); //alterando o comportando da tag <audio /> toda vez q o estado isPlaying é alterado
@@ -68,10 +69,17 @@ export function Player() {
 
   return (
     <div className={styles.playerContainer}>
-      <header>
-        <img src="/playing.svg" alt="Tocando agora"/>
-        <strong>Tocando agora</strong>
-      </header>
+      { episode ? (
+        <header className={animationsStyles.animateTopToBottom}>
+          <img src="/playing.svg" alt="Tocando agora"/>
+          <strong>Tocando agora</strong>
+        </header>
+      ) : (
+        <header className={animationsStyles.animateTopToBottom}>
+          <img src="/playing.svg" alt="Selecione um episódio"/>
+          <strong>Selecione um episódio</strong>
+        </header>
+      ) }
 
       { episode ? ( //caso haja um episódio a ser tocado
         <div className={styles.currentEpisode}>

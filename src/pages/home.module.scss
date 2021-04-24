@@ -42,9 +42,11 @@
           font-weight: 600;
           text-decoration: none;
           line-height: 1.4rem;
+          transition: color 0.2s;
 
           &:hover {
             text-decoration: underline;
+            color: var(--purple-500);
           }
         }
 
@@ -140,9 +142,11 @@
         text-decoration: none;
         line-height: 1.4rem;
         font-size: 1rem;
+        transition: color 0.2s;
 
         &:hover {
           text-decoration: underline;
+          color: var(--purple-500);
         }
       }
 

@@ -12,6 +12,7 @@ import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from "./home.module.scss";
+import animationsStyles from "../styles/animations.module.scss";
 
 interface Episode {
   id: string;
@@ -22,15 +23,15 @@ interface Episode {
   url: string;
   duration: number;
   durationAsString: string;
-}
+};
 
 interface HomeProps {
   latestEpisodes: Episode[];
   allEpisodes: Episode[];
-}
+};
 
 export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
-  const { playList } = usePlayer(); //puxando os dados do Context
+  const { playList } = usePlayer(); //puxando uma função do Player Context
 
   const episodeList = [...latestEpisodes, ...allEpisodes]; //todos os episódios do banco
 
@@ -46,7 +47,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 
           <ul>
             {latestEpisodes.map((episode, index) => (
-              <li key={episode.id}>
+              <li className={animationsStyles.animateLeft} key={episode.id}>
                 <Image
                   width={192}
                   height={192}
@@ -79,7 +80,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 
         <section className={styles.allEpisodes}>
           <h2>Todos os episódios</h2>
-          <table cellSpacing={0}>
+          <table className={animationsStyles.animateBottomToTop} cellSpacing={0}>
             <thead>
               <tr>
                 <th></th>
@@ -129,7 +130,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
       </div>
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await api.get("episodes", {
@@ -140,16 +141,17 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
-  const episodes = data.map((episode) => {
+  const episodes = data.map(episode => {
     return {
       id: episode.id,
       title: episode.title,
       thumbnail: episode.thumbnail,
       members: episode.members,
-      publishedAt: format(parseISO(episode.published_at), "d MMM yy", {
+      publishedAt: format(parseISO(episode.published_at), 
+      "d MMM yy", 
+      {
         locale: ptBR,
       }),
-      duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(
         Number(episode.file.duration)
       ),
@@ -157,7 +159,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
-  const latestEpisodes = episodes.slice(0, 2); //pegando apenas os dois ultimos episódios lançados
+  const latestEpisodes = episodes.slice(0, 2); //pegando apenas os dois últimos episódios lançados
   const allEpisodes = episodes.slice(2, episodes.length); //pegando o restante dos episódios
 
   return {

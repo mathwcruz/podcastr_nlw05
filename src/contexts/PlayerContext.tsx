@@ -34,27 +34,25 @@ interface PlayerContextProviderProps {
 export const PlayerContext = createContext({} as PlayerContextData); //forçando a atribuição da tipagem do TypeScript
 
 export function PlayerContextProvider({ children }: PlayerContextProviderProps) { //exportando as funcionalidades do Context
-  const [episodeList, setEpisodeList] = useState([]); //array de episódios
+  const [episodeList, setEpisodeList] = useState<Episode[]>([]); //array de episódios
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0); //posição do episódio no array
   const [isPlaying, setIsPlaying] = useState(false); //informa se o episódio está tocando
   const [isLooping, setIsLooping] = useState(false); //informa se é para repetir o episódio
   const [isShuffling, setIsShuffling] = useState(false); //informa se é para embaralhar a lista de episódios
 
-  function play(episode: Episode) {
-    //função para tocar o episódio
-    setEpisodeList([episode]); //passando o episódio a ser tocado no player
+  function play(episode: Episode) { //função para tocar um episódio
+    setEpisodeList([episode]); //passando somente o episódio a ser tocado no player para a lista de episódios
     setCurrentEpisodeIndex(0); //zerando o indíce
     setIsPlaying(true);
   };
 
-  function playList(list: Episode[], index: number) {
+  function playList(list: Episode[], index: number) { //função para tocar uma lista de episódios
     setEpisodeList(list); //lista de episódios a ser toada
     setCurrentEpisodeIndex(index); //indíce do episódio atual, que está tocando
     setIsPlaying(true);
   };
 
-  function togglePlay() {
-    //função para alterar o botão entre pause e play, conforme o usuário interage com o Player
+  function togglePlay() { //função para alterar o botão entre pause e play, conforme o usuário interage com o Player
     setIsPlaying(!isPlaying);
   };
 
@@ -76,7 +74,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
   };
 
   const hasPrevious = currentEpisodeIndex > 0; // verificando se o episódio que está tocando possui um anterior a ele
-  const hasNext = isShuffling || (currentEpisodeIndex + 1) < episodeList.length; // verificando se o episódio que está possui um após ele ou se o Player está em modo Shuffle
+  const hasNext = isShuffling || (currentEpisodeIndex + 1) < episodeList.length; // verificando se o episódio que está tocando, possui um após ele ou se o Player está em modo Shuffle
 
   function playNext() {
     if (isShuffling) { //caso o usuário clicou para embaralhar a lista de episódios

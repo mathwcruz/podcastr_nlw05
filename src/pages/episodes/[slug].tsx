@@ -11,6 +11,7 @@ import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
 import styles from "./episode.module.scss";
+import animationsStyles from "../../styles/animations.module.scss";
 
 interface Episode {
   id: string;
@@ -22,13 +23,13 @@ interface Episode {
   description: string;
   duration: number;
   durationAsString: string;
-}
+};
 
 interface EpisodeProps {
   episode: Episode;
-}
+};
 
-export default function Episodes({ episode }: EpisodeProps) {
+export default function Episode({ episode }: EpisodeProps) {
   const { play } = usePlayer();
 
   return (
@@ -38,7 +39,7 @@ export default function Episodes({ episode }: EpisodeProps) {
       </Head>
 
       <div className={styles.episode}>
-        <div className={styles.thumbnailContainer}>
+        <div className={`${styles.thumbnailContainer} ${animationsStyles.animateTopToBottom}`}>
           <Link href="/">
             <button type="button">
               <img src="/arrow-left.svg" alt="Voltar" />
@@ -55,7 +56,7 @@ export default function Episodes({ episode }: EpisodeProps) {
           </button>
         </div>
 
-        <header>
+        <header className={animationsStyles.animateAppear}>
           <h1>{episode.title}</h1>
           <span>{episode.members}</span>
           <span>{episode.publishedAt}</span>
@@ -63,13 +64,13 @@ export default function Episodes({ episode }: EpisodeProps) {
         </header>
 
         <div
-          className={styles.description}
+          className={`${styles.description} ${animationsStyles.animateAppear}`}
           dangerouslySetInnerHTML={{ __html: episode.description }}
         />
       </div>
     </>
   );
-}
+};
 
 //sempre que temos uma página estática dinâmica, arquivo [slug].tsx, por exemplo, deve-se utilizar a função getStaticPaths para informar ao Next quais páginas devem ser geradas estaticamente
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -94,9 +95,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     fallback: "blocking", 
     /* 
-      1 - false = caso o paths esteja vazio (paths: []), se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, irá tomar um 404. Caso o paths contenha alguns parametros, o usuario so terá acesso àquelas páginas geradas de maneira estática, já as outras, irá tomar um 404
-      2 - true = caso o paths esteja vazio (paths: []), se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, o next irá buscar os dados dessa página e gerar uma página estática na hora. Esses dados irão ser buscados pelo lado do Client (browser) e não do Next (servidor node)
-      3 - blocking = Se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, o next irá buscar os dados dessa página e gerar uma página estática na hora. Caso seja passado algumas páginas ao "paths" e o fallback for igual a "blocking", as páginas passadas ao path serão geradas de maneira estática, já na build e o resto irá ter o comportamento padrao do blocking. Esses dados irão ser buscados pelo lado do Next (node.js) e não no Client (browser). Para questões de SEO, é a melhor opção.
+      1 - false = caso o paths esteja vazio (paths: []), se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, irá tomar um 404. Caso o paths contenha alguns parametros, o usuario so terá acesso àquelas páginas geradas de maneira estática, já as outras, irá tomar um 404.
+      2 - true = caso o paths esteja vazio (paths: []), se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, o next irá buscar os dados dessa página e gerar uma página estática na hora. Esses dados irão ser buscados pelo lado do Client (browser) e não do Next (servidor node).
+      3 - blocking = Se o usuario tentar entrar nessa página que nao foi gerada de maneira estática, o next irá buscar os dados dessa página e gerar uma página estática na hora. Caso seja passado algumas páginas ao "paths" e o fallback for igual a "blocking", as páginas passadas ao paths serão geradas de maneira estática, já na build e o resto irá ter o comportamento padrao do blocking. Esses dados irão ser buscados pelo lado do Next (node.js) e não no Client (browser). Para questões de SEO, é a melhor opção.
      */
   };
 };
