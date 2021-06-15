@@ -61,7 +61,7 @@ To run the application on the web, follow the instructions from your terminal:
 - After that, run `yarn dev` to run the application, will open at the address `localhost:3000`
 <br>
 
-### Autor
+### Author
 ---
 
 <a href="https://app.rocketseat.com.br/me/matheus-da-cruz-frontend">
