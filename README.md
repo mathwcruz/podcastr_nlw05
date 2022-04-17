@@ -2,9 +2,9 @@
   <img src="./public/logo.svg" alt="Logo do Podcastr" width="250">
 </h1>
 
-## **<h2 align="center">Front end application  💻</h2>**
+<h2 align="center">Front end application  💻</h2>
 
-## <p><h2 align="center">A [podcast app](https://podcastr-mathwcruz.vercel.app)</h2> </p>
+## <h2 align="center">A [podcast app](https://podcastr-mathwcruz.vercel.app)</h2>
 
 <p align="center">
   <a href="#computer-demonstration-of-the-application">Demonstration of the application</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -75,4 +75,4 @@ Desenvolvido por Matheus da Cruz 😊
 [![Gmail Badge](https://img.shields.io/badge/-matheuswachcruz@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:matheuswachcruz@gmail.com)](mailto:matheuswachcruz@gmail.com)
 <br>
 
- ### <p> <h2 align="center">Another application made by Matheus da Cruz 👨‍💻 </h2> </p>
+<h2 align="center">Another application developed by Matheus da Cruz 👨‍💻 </h2>
